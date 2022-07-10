@@ -15,14 +15,6 @@ export default {
     props: {
         subtitle: Object
     },
-    methods: {
-        onChange(event) {
-            console.log(event.target.value);
-        },
-        onFocus(event) {
-            console.log(event.target.value);
-        }
-    },
     emits: ['before-time', 'after-time'],
 }
 </script>

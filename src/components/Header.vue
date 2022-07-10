@@ -1,7 +1,7 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <Button text="Choose subtitle" color="Green"/>
+        <Button @file-uploaded="this.$emit('file-uploaded')" text="Choose subtitle" :color="color"/>
     </header>
 </template>
 
@@ -12,10 +12,12 @@ export default {
     name: 'Header',
     props: {
         title: String,
+        color: String,
     },
     components: {
         Button,
-    }
+    },
+    emits: ['file-uploaded'],
 }
 </script>
 

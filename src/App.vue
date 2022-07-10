@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header title="Subtitle Sync"/>
+    <Header @file-uploaded="showData" title="Subtitle Sync" :color="downloadReady ? 'blue' : 'green'"/>
     <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle"/>
   </div>
 </template>
@@ -22,12 +22,35 @@ export default {
       beforeTime: new Date,
       afterTime: new Date,
       timeDiff: new Date,
+      downloadReady: false,
     }
   },
   methods: {
+    showData() {
+      const parser = require('./parser/subtitle-parser');
+      const selectedFile = document.getElementById('input').files[0];
+
+          let fileReader = new FileReader();
+          fileReader.onload = (fileLoadedEvent) => {
+              let text = fileLoadedEvent.target.result;
+
+              function readySubtitle(text) {
+                let sub = text;
+                sub = sub.trim();
+                sub += "\r\n\r\n";
+                return sub;
+              }
+
+              this.subtitle = parser.parse(readySubtitle(text));
+          }
+
+          fileReader.readAsText(selectedFile, 'UTF-8');
+          
+          this.downloadReady = !this.downloadReady;
+    },
     setBeforeTime(value) {
       const timeArry = value.match(/[0-9]+/g);
-      console.log(timeArry);
+
       let hour = Number(timeArry[0]);
       let min = Number(timeArry[1]);
       let sec = Number(timeArry[2]);
@@ -68,7 +91,6 @@ export default {
       return new Date(1970, 1, 1, hour, min, sec, mm);
     },
     updateSubtitle(offset) {
-      console.log(offset);
       Object.keys(this.subtitle).forEach(key => {
 
         const startTimeArry = this.subtitle[key][1].match(/[0-9]+/g);
@@ -101,9 +123,7 @@ export default {
         mm = newEndDate.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
         ss = newEndDate.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2});
         fff = newEndDate.getMilliseconds().toLocaleString('en-US', {minimumIntegerDigits: 3});
-        this.subtitle[key][3] = `${hh}:${mm}:${ss},${fff}`;
-
-        this.afterTime.getTime() > this.beforeTime.getTime() ? console.log("True") : console.log("False");        
+        this.subtitle[key][3] = `${hh}:${mm}:${ss},${fff}`;      
       })
     },
   },

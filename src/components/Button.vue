@@ -1,5 +1,5 @@
 <template>
-    <button @click="onClick()" :style="{ background: color}" class="btn">{{ text }}</button>
+    <input id="input" @change="this.$emit('file-uploaded')" type="file" :style="{ background: color}" class="btn">
 </template>
 
 <script>
@@ -9,10 +9,6 @@ export default {
         text: String,
         color: String,
     },
-    methods: {
-        onClick() {
-            console.log("Click");
-        }
-    }
+    emits: ['file-uploaded'],
 }
 </script>
