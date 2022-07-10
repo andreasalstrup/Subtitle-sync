@@ -44,12 +44,12 @@ export default {
       let ms = Number(timeArry[3]); 
 
       this.afterTime = new Date(1970, 1, 1, hour, min, sec, ms);
-
       const dateDiff = Math.abs(this.afterTime - this.beforeTime);
-
       this.timeDiff = this.calculateTimestamp(dateDiff);
 
-      this.updateSubtitle(this.timeDiff);
+      this.afterTime.getTime() > this.beforeTime.getTime() 
+      ? this.updateSubtitle(this.timeDiff - new Date(1970, 1, 1).getTime()) 
+      : this.updateSubtitle(-this.timeDiff + new Date(1970, 1, 1).getTime()); 
     },
     calculateTimestamp(ms) {
       const HOUR_IN_MS = 3600000;
@@ -67,27 +67,44 @@ export default {
 
       return new Date(1970, 1, 1, hour, min, sec, mm);
     },
-    updateSubtitle(date) {
-
-
-
+    updateSubtitle(offset) {
+      console.log(offset);
       Object.keys(this.subtitle).forEach(key => {
 
         const startTimeArry = this.subtitle[key][1].match(/[0-9]+/g);
+        let hourStart = Number(startTimeArry[0]);
+        let minStart = Number(startTimeArry[1]);
+        let secStart = Number(startTimeArry[2]);
+        let msStart = Number(startTimeArry[3]); 
+        const startDate = new Date(1970, 1, 1, hourStart, minStart, secStart, msStart);
+        const newStartTime = (startDate.getTime() - new Date(1970, 1, 1).getTime()) + offset;
+        const newStartDate = this.calculateTimestamp(newStartTime);
+
         const endTimeArry = this.subtitle[key][3].match(/[0-9]+/g);
-        
-        //start time
-        this.subtitle[key][1];
-        //end time
-        this.subtitle[key][3];
+        let hourEnd = Number(endTimeArry[0]);
+        let minEnd = Number(endTimeArry[1]);
+        let secEnd = Number(endTimeArry[2]);
+        let msEnd = Number(endTimeArry[3]);
+        const endDate = new Date(1970, 1, 1, hourEnd, minEnd, secEnd, msEnd);
+        const newEndTime = (endDate.getTime() - new Date(1970, 1, 1).getTime()) + offset;
+        const newEndDate = this.calculateTimestamp(newEndTime);
 
-        console.log(key, this.subtitle[key][1]);
-        console.log(key, this.subtitle[key][3]);
+        //set start time
+        let hh = newStartDate.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2});
+        let mm = newStartDate.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
+        let ss = newStartDate.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2});
+        let fff = newStartDate.getMilliseconds().toLocaleString('en-US', {minimumIntegerDigits: 3});
+        this.subtitle[key][1] = `${hh}:${mm}:${ss},${fff}`;
+
+        //set end time
+        hh = newEndDate.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2});
+        mm = newEndDate.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2});
+        ss = newEndDate.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2});
+        fff = newEndDate.getMilliseconds().toLocaleString('en-US', {minimumIntegerDigits: 3});
+        this.subtitle[key][3] = `${hh}:${mm}:${ss},${fff}`;
+
+        this.afterTime.getTime() > this.beforeTime.getTime() ? console.log("True") : console.log("False");        
       })
-
-    },
-    dateToStringArray(date) {
-
     },
   },
   created() {
