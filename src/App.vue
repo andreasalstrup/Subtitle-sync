@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header @file-uploaded="showData" title="Subtitle Sync" :color="downloadReady ? 'blue' : 'green'"/>
+    <Header @file-uploaded="showData" @download="downloadFile" title="Subtitle Sync" :color="downloadReady ? 'blue' : 'green'" :downloadReady="downloadReady"/>
     <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle"/>
   </div>
 </template>
@@ -26,6 +26,9 @@ export default {
     }
   },
   methods: {
+    downloadFile(){
+      console.log("Download");
+    },
     showData() {
       const parser = require('./parser/subtitle-parser');
       const selectedFile = document.getElementById('input').files[0];

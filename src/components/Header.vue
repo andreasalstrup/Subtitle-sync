@@ -1,7 +1,10 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <Button @file-uploaded="this.$emit('file-uploaded')" text="Choose subtitle" :color="color"/>
+        <Button @file-uploaded="this.$emit('file-uploaded')" text="Choose subtitle" type="file" :color="color"/>
+        <div v-show="downloadReady">
+            <Button @click="this.$emit('download')" value="Download" type="button" color="Green"/>
+        </div>
     </header>
 </template>
 
@@ -12,12 +15,14 @@ export default {
     name: 'Header',
     props: {
         title: String,
+        value: String,
         color: String,
+        downloadReady: Boolean,
     },
     components: {
         Button,
     },
-    emits: ['file-uploaded'],
+    emits: ['file-uploaded', 'download'],
 }
 </script>
 
