@@ -10,6 +10,8 @@ import { h } from '@vue/runtime-core'
 import Header from './components/Header.vue'
 import Subtitle from './components/Subtitle.vue'
 
+require('file-saver');
+
 export default {
   name: 'App',
   components: {
@@ -27,7 +29,31 @@ export default {
   },
   methods: {
     downloadFile(){
-      console.log("Download");
+
+
+      let newSubtitle = this.buildSubtitle();
+
+      let myFile = new File(
+        [newSubtitle],
+        "newSubtitle.str",
+        {type: "text/plain;charset=utf8"}
+      );
+
+      saveAs(myFile);
+    },
+    buildSubtitle() {
+      let subtitle = '';
+      for (let e in this.subtitle) {
+        let num = this.subtitle[e][0];
+        let startTime = this.subtitle[e][1];
+        let arrow = this.subtitle[e][2];
+        let endTime = this.subtitle[e][3];
+        let text = this.subtitle[e][4];
+
+        subtitle += `${num}\n${startTime}${arrow}${endTime}\n${text}\n\n`;
+      }
+      return subtitle.trim();
+
     },
     showData() {
       const parser = require('./parser/subtitle-parser');
