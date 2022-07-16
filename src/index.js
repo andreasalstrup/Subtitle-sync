@@ -12,6 +12,7 @@ try {
 }
 
 let Subtitle = parser.parse(sub);
+console.log(Subtitle);
 
 let num = Subtitle[7][0];
 let startTime = Subtitle[7][1];

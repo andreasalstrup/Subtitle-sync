@@ -26,12 +26,13 @@
 }
 
 Start
-	= Seqsub*
+	= Group*
     / '\0';
 
-Seqsub
-	= num:Num+ NewLine start:Time arrow:' --> ' end:Time NewLine sen:Sentence '\r\n\r\n' ('\r')?
+Group
+	= num:Num+ NewLine start:Time arrow:' --> ' end:Time NewLine sen:Sentence NewLine NewLine
 		{let senStr = concat(result); return [concat(num), concat(start), arrow, concat(end), removeComma(senStr)]};
+
 Time
 	= Num Num ':' Num Num ':' Num Num ',' Num Num Num;
 
@@ -39,15 +40,12 @@ Num
 	= [0-9];
 
 Sentence
-	= sen:(char+ ('\r\n'char+)?)
-    	{result = removeNull(sen)};
+	= sen:(char+ (NewLine char+)?)
+        {result = removeNull(sen)};
 
 char
-	= [a-zA-Z0-9!@#$&()\-`.+,/\"' '<>=:?ñ]+;
+	= [^\r\n\r\n];
     
 NewLine 
-	= [ \t\n\r]*
-    / [\r]*;
-
-Next
-    = '\r\n\r\n\r';
+    = '\n'          // Linux
+    / '\r' '\n'?;   // Mac/Windows
