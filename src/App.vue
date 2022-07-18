@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <Header @file-uploaded="showData" @download="downloadFile" title="Subtitle Sync" :color="downloadReady ? 'blue' : 'green'" :downloadReady="downloadReady"/>
-    <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle"/>
+    <p>Choose a subtitle and by changing the start time or end time the offset will be applied throughout.</p>
+    <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle" :downloadReady="downloadReady"/>
   </div>
 </template>
 
@@ -57,7 +58,7 @@ export default {
     },
     showData() {
       const parser = require('./parser/subtitle-parser');
-      const selectedFile = document.getElementById('input').files[0];
+      const selectedFile = document.getElementById('file-upload').files[0];
 
           let fileReader = new FileReader();
           fileReader.onload = (fileLoadedEvent) => {
@@ -69,7 +70,6 @@ export default {
                 sub += "\r\n\r\n";
                 return sub;
               }
-
               this.subtitle = parser.parse(readySubtitle(text));
           }
 
@@ -159,25 +159,25 @@ export default {
   created() {
     this.subtitle = [
       [
-        '1',
-        '00:00:31,324',
-        ' --> ',
-        '00:00:34,577',
-        '<font color="#D900D9">(MAN BREATHING HEAVILY)</font>'
+        "1",
+        "00:02:16,612",
+        " --> ",
+        "00:02:19,376",
+        "Senator, we're making\nour final approach into Coruscant."
       ],
       [
         '2',
-        '00:00:39,958',
+        '00:02:19,482',
         ' --> ',
-        '00:00:41,751',
-        '<font color="#D900D9">(PEOPLE CHATTERING)</font>'
+        '00:02:21,609',
+        'Very good, Lieutenant.'
       ],
       [
-        '3',
-        '00:00:43,294',
-        ' --> ',
-        '00:00:45,296',
-        '<font color="#D900D9">(FAIRGROUND MUSIC PLAYING)</font>'
+        "3",
+        "00:03:13,336",
+        " --> ",
+        "00:03:15,167",
+        "We made it."
       ],
     ]
   }
@@ -201,20 +201,35 @@ body {
   min-height: 300px;
   border: 1px solid steelblue;
   padding: 30px;
+  padding-right: 125px;
+  padding-left: 30px;
   border-radius: 5px;
+}
+.inner-container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid steelblue;
+  padding: 30px;
+  border-radius: 5px;
+  opacity: 0.5;
+  transition: opacity 1s;
 }
 .btn {
   display: inline-block;
   background: #000;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 25px;
   margin: 5px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+  white-space: nowrap;
+  text-align: center;
 }
 .btn:focus {
   outline: none;
@@ -225,5 +240,8 @@ body {
 .btn-block {
   display: block;
   width: 100%;
+}
+input[type="file"] {
+    display: none;
 }
 </style>

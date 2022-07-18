@@ -1,12 +1,13 @@
 <template>
-    <input id="input" @change="this.$emit('file-uploaded')" :value="value" :type="type" :style="{ background: color}" class="btn">
+    <input :id="id" @change="this.$emit('file-uploaded')" :value="value" :type="type" :style="{ background: color}" :class="childclass">
 </template>
 
 <script>
 export default {
     name: 'Button',
     props:{
-        text: String, // slet
+        id: String,
+        childclass: String,
         value: String,
         color: String,
         type: String,

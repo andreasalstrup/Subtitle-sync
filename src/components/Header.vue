@@ -1,9 +1,14 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <Button @file-uploaded="this.$emit('file-uploaded')" text="Choose subtitle" type="file" :color="color"/>
-        <div v-show="downloadReady">
-            <Button @click="this.$emit('download')" value="Download" type="button" color="Green"/>
+        <div>
+            <label for="file-upload" class="btn" :style="{ background: color}">
+                <i class="fa fa-cloud-upload"></i> Choose Subtitle
+            </label>
+            <Button @file-uploaded="this.$emit('file-uploaded')" id="file-upload" type="file"/>
+            <div v-show="downloadReady" style="position: fixed;display: inline-block;" >
+                <Button @click="this.$emit('download')" id="download" value="Save as" type="button" color="Green" childclass="btn" style="margin-left: 8px"/>
+            </div>  
         </div>
     </header>
 </template>
