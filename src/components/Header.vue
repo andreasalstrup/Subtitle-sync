@@ -3,7 +3,7 @@
         <h1>{{ title }}</h1>
         <div>
             <label for="file-upload" class="btn" :style="{ background: color}">
-                <i class="fa fa-cloud-upload"></i> Choose Subtitle
+                <i class="fa-solid fa-upload"></i> Choose Subtitle
             </label>
             <Button @file-uploaded="this.$emit('file-uploaded')" id="file-upload" type="file"/>
             <div v-show="downloadReady" style="position: fixed;display: inline-block;" >
