@@ -2,12 +2,23 @@
     <header>
         <h1>{{ title }}</h1>
         <div>
-            <label for="file-upload" class="btn" :style="{ background: color}">
-                <i class="fa-solid fa-upload"></i> Choose Subtitle
-            </label>
-            <Button @file-uploaded="this.$emit('file-uploaded')" id="file-upload" type="file"/>
+            <Button 
+                @file-uploaded="this.$emit('file-uploaded')" 
+                childclass="btn"
+                type="file" 
+                id="file-upload" 
+                value="Choose Subtitle" 
+                icon="fa-solid fa-upload"
+                :color="color"/>
             <div v-show="downloadReady" style="position: fixed;display: inline-block;" >
-                <Button @click="this.$emit('download')" id="download" value="Save as" type="button" color="Green" childclass="btn" style="margin-left: 8px"/>
+                <Button 
+                    @download="this.$emit('download')"
+                    childclass="btn"
+                    type="button" 
+                    id="download" 
+                    value="Save as" 
+                    icon="fa-solid fa-save"
+                    color="Green"/>
             </div>  
         </div>
     </header>

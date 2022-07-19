@@ -201,7 +201,7 @@ body {
   min-height: 300px;
   border: 1px solid steelblue;
   padding: 30px;
-  padding-right: 125px;
+  padding-right: 135px;
   padding-left: 30px;
   border-radius: 5px;
 }

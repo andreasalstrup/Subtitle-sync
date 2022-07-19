@@ -1,5 +1,8 @@
 <template>
-    <input :id="id" @change="this.$emit('file-uploaded')" :value="value" :type="type" :style="{ background: color}" :class="childclass">
+    <label :for="id" :class="childclass" :style="{ background: color}">
+        <i :class="icon"></i> {{ value }}
+    </label>
+    <input :id="id" :type="type" @change="this.$emit('file-uploaded')" @click="this.$emit('download')">
 </template>
 
 <script>
@@ -11,7 +14,8 @@ export default {
         value: String,
         color: String,
         type: String,
+        icon: String,
     },
-    emits: ['file-uploaded'],
+    emits: ['file-uploaded', 'download'],
 }
 </script>
