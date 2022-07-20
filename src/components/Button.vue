@@ -2,7 +2,7 @@
     <label :for="id" :class="childclass" :style="{ background: color}">
         <i :class="icon"></i> {{ value }}
     </label>
-    <input :id="id" :type="type" @change="this.$emit('file-uploaded')" @click="this.$emit('download')">
+    <input :id="id" :type="type" @change="this.$emit('file-uploaded')" @click="this.$emit('download')" style="display: none">
 </template>
 
 <script>
