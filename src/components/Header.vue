@@ -4,7 +4,7 @@
         <div>
             <Button 
                 @file-uploaded="this.$emit('file-uploaded')" 
-                childclass="btn"
+                childclass="btn p-2 m-2"
                 type="file" 
                 id="file-upload" 
                 value="Choose Subtitle" 
@@ -13,7 +13,7 @@
             <div v-show="downloadReady" style="position: fixed;display: inline-block;" >
                 <Button 
                     @download="this.$emit('download')"
-                    childclass="btn"
+                    childclass="btn p-2 m-2"
                     type="button" 
                     id="download" 
                     value="Save as" 

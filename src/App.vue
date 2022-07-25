@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="border rounded border-primary container">
     <Header @file-uploaded="showData" @download="downloadFile" title="Subtitle Sync" :color="downloadReady ? 'blue' : 'green'" :downloadReady="downloadReady"/>
     <p>Choose a subtitle and by changing the start time or end time the offset will be applied throughout.</p>
-    <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle" :downloadReady="downloadReady"/>
+    <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle" :accOffset="accOffset" :downloadReady="downloadReady"/>
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
       beforeTime: new Date,
       afterTime: new Date,
       timeDiff: new Date,
+      accOffset: 0,
       downloadReady: false,
     }
   },
@@ -120,6 +121,8 @@ export default {
       return new Date(1970, 1, 1, hour, min, sec, mm);
     },
     updateSubtitle(offset) {
+      this.accOffset += offset;
+
       Object.keys(this.subtitle).forEach(key => {
 
         const startTimeArry = this.subtitle[key][1].match(/[0-9]+/g);
@@ -201,9 +204,10 @@ body {
   min-height: 300px;
   border: 1px solid steelblue;
   padding: 30px;
-  padding-right: 135px;
+  padding-right: 110px;
   padding-left: 30px;
   border-radius: 5px;
+  overflow-x: hidden;
 }
 .inner-container {
   max-width: 500px;

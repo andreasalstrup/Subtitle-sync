@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSave } from '@fortawesome/free-solid-svg-icons'
