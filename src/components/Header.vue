@@ -10,7 +10,8 @@
                 value="Choose Subtitle" 
                 icon="fa-solid fa-upload"
                 :color="color"/>
-            <div v-show="downloadReady" style="position: fixed;display: inline-block;" >
+            <Transition>
+            <div v-show="downloadReady" class="fade-in" style="position: fixed;display: inline-block;" >
                 <Button 
                     @download="this.$emit('download')"
                     childclass="btn p-2 m-2"
@@ -19,7 +20,8 @@
                     value="Save as" 
                     icon="fa-solid fa-save"
                     color="Green"/>
-            </div>  
+            </div>
+            </Transition>  
         </div>
     </header>
 </template>

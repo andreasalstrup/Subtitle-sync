@@ -248,4 +248,15 @@ body {
 input[type="file"] {
     display: none;
 }
+.fade-in {
+    transition: opacity 2s !important;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
