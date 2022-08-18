@@ -22,7 +22,12 @@
         </div>
         </Transition>  
     </div>
-    <Subtitle @before-time="setBeforeTime" @after-time="calculateDiff" :subtitle="subtitle" :accOffset="accOffset" :downloadReady="downloadReady"/>
+    <Subtitle 
+        @before-time="setBeforeTime" 
+        @after-time="calculateDiff"
+        :subtitle="subtitle" 
+        :accOffset="accOffset" 
+        :downloadReady="downloadReady"/>
 </template>
 
 <script>
@@ -95,6 +100,10 @@ export default {
           this.downloadReady = !this.downloadReady;
     },
     setBeforeTime(value) {
+      if (!/[0-9]+:[0-9]+:[0-9]+,[0-9]+/.test(value)) {
+        return;
+      }
+
       const timeArry = value.match(/[0-9]+/g);
 
       let hour = Number(timeArry[0]);
@@ -105,6 +114,10 @@ export default {
       this.beforeTime = new Date(1970, 1, 1, hour, min, sec, ms);
     },
     calculateDiff(value) {
+      if (!/[0-9]+:[0-9]+:[0-9]+,[0-9]+/.test(value)) {
+        return;
+      }
+
       const timeArry = value.match(/[0-9]+/g);
 
       let hour = Number(timeArry[0]);

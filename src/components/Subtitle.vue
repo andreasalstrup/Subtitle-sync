@@ -6,6 +6,11 @@
             <label class="col-sm-3 col-form-label col-form-label-lg" :for="`start-${group[0][0]}`">Start</label>
             <div class="col-sm-8">
                 <input :name="`start-${group[0][0]}`"  type="text" class="form-control form-control-lg"
+                    autocomplete="off"
+                    pattern="[0-9]+:[0-9]+:[0-9]+,[0-9]+"
+                    oninput="this.reportValidity()"
+                    required
+
                     :id="`start-${group[0][0]}`" 
                     @focus="this.$emit('before-time', $event.target.value)" 
                     @change="this.$emit('after-time', $event.target.value)" 
@@ -24,7 +29,12 @@
             <label class="col-sm-3 col-form-label col-form-label-lg" :for="`end-${group[0][0]}`">End</label>
             <div class="col-sm-8">
                 <input :name="`end-${group[0][0]}`"  type="text" class="form-control form-control-lg"
-                    :id="`end-${group[0][0]}`" 
+                    autocomplete="off"
+                    pattern="[0-9]+:[0-9]+:[0-9]+,[0-9]+"
+                    oninput="this.reportValidity()"
+                    required
+
+                    :id="`end-${group[0][0]}`"
                     @focus="this.$emit('before-time', $event.target.value)" 
                     @change="this.$emit('after-time', $event.target.value)" 
                     :value="group[3]"
