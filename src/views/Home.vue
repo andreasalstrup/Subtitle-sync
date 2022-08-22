@@ -33,6 +33,7 @@
 <script>
 import Subtitle from '../components/Subtitle.vue'
 import Button from '../components/Button.vue'
+import router from '@/router';
 
 require('file-saver');
 
@@ -50,6 +51,7 @@ export default {
       timeDiff: new Date,
       accOffset: 0,
       downloadReady: false,
+      subtitleName: '',
     }
   },
   methods: {
@@ -58,7 +60,7 @@ export default {
 
       let myFile = new File(
         [newSubtitle],
-        "newSubtitle.str",
+        "[SubtitleSync.com] " + this.subtitleName,
         {type: "text/plain;charset=utf8"}
       );
 
@@ -81,23 +83,36 @@ export default {
     showData() {
       const parser = require('../parser/subtitle-parser');
       const selectedFile = document.getElementById('file-upload').files[0];
+      const languageEncoding = require("detect-file-encoding-and-language");
 
-          let fileReader = new FileReader();
-          fileReader.onload = (fileLoadedEvent) => {
-              let text = fileLoadedEvent.target.result;
+      this.subtitleName = selectedFile.name;
+      
 
-              function readySubtitle(text) {
-                let sub = text;
-                sub = sub.trim();
-                sub += "\r\n\r\n";
-                return sub;
-              }
+      languageEncoding(selectedFile).then((fileInfo) => {        
+        let encoding = fileInfo.encoding;
+        let fileReader = new FileReader();
+        fileReader.onload = (fileLoadedEvent) => {
+            let text = fileLoadedEvent.target.result;
+            function readySubtitle(text) {
+              let sub = text;
+              sub = sub.trim();
+              sub += "\r\n\r\n";
+              return sub;
+            }
+
+            try {
               this.subtitle = parser.parse(readySubtitle(text));
-          }
+            } catch (error) {
+              this.downloadReady = false;
+              alert(`Cannot parse the file: ${error.name}`);
+              location.reload();
+            }
+        }
 
-          fileReader.readAsText(selectedFile, 'UTF-8');
-          
-          this.downloadReady = !this.downloadReady;
+        fileReader.readAsText(selectedFile, encoding);
+      });
+
+      this.downloadReady = true;
     },
     setBeforeTime(value) {
       if (!/[0-9]+:[0-9]+:[0-9]+,[0-9]+/.test(value)) {
