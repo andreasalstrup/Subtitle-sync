@@ -19,6 +19,7 @@
     "detect-file-encoding-and-language": "^2.2.2",
     "file-saver": "^2.0.5",
     "vue": "^3.2.13",
+    "vue-meta": "^3.0.0-alpha.10",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {

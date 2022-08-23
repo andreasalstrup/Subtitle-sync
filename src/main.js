@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createMetaManager } from 'vue-meta'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -12,5 +13,6 @@ library.add(faSave);
 
 createApp(App)
 .use(router)
+.use(createMetaManager())
 .component('fa', FontAwesomeIcon)
 .mount('#app')

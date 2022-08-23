@@ -1,4 +1,7 @@
 <template>
+  <metainfo>
+    <template v-slot:title="{ content }">{{ content ? `${content} | Subtitle Sync` : `Subtitle Sync` }}</template>
+  </metainfo>
   <div class="border rounded border-primary container">
     <Header title="Subtitle Sync"/>
     <router-view></router-view>
@@ -10,8 +13,21 @@
 import { h } from '@vue/runtime-core'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import { useMeta } from 'vue-meta'
 
 export default {
+  setup() {
+    useMeta({
+      title: 'Time sync tool',
+      htmlAttrs: { lang: 'en', amp: true },
+      description: [
+        {
+          vmid: "description",
+          content: "Online edit your subtitle offset by choosing a timestamp and the tool will automatically sync all lines",
+        }
+      ],
+    })
+  },
   name: 'App',
   components: {
     Header,
