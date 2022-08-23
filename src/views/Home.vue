@@ -60,7 +60,7 @@ export default {
 
       let myFile = new File(
         [newSubtitle],
-        "[SubtitleSync.com] " + this.subtitleName,
+        "[subtitle-sync.com] " + this.subtitleName,
         {type: "text/plain;charset=utf8"}
       );
 

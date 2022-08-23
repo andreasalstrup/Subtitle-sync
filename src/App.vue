@@ -2,7 +2,7 @@
   <div class="border rounded border-primary container">
     <Header title="Subtitle Sync"/>
     <router-view></router-view>
-    <Footer title="Subtitle Sync"/>
+    <Footer title="subtitle-sync"/>
   </div>
 </template>
 
