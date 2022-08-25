@@ -20,6 +20,7 @@ export default {
     useMeta({
       title: 'Time sync tool',
       htmlAttrs: { lang: 'en', amp: true },
+      link: {rel: 'canonical', href: 'https://www.subtitle-sync.com'},
       meta: [
         { name: 'description', vmid: 'description', content: 'Online edit your subtitle offset by choosing a timestamp and the tool will automatically sync all lines' },
         { name: 'keywords', content: 'sync, resync, synchronize, sub, subtitle, tool, editor, edit, time, timestamp, auto, automatically, online, offset, shift, shifter, str, free, fix, adjust, suprep, vue, pegjs, parser, generator'},
