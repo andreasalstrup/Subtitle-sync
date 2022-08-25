@@ -1,5 +1,9 @@
 <template>
-    <p>Choose a subtitle and by changing the start time or end time the offset will be applied throughout.</p>
+    <p>Sync subtitle by changing the start time or end time. The offset will then be applied throughout - Offset subtitles easy.</p>
+    <ul>
+      <li>Sync all languages</li>
+      <li>Supports SubRip file format (.str)</li>
+    </ul>  
     <div class="text-end">
         <Button 
             @file-uploaded="showData" 
