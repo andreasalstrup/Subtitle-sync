@@ -1,9 +1,14 @@
 <template>
-    <p>Sync subtitle by changing the start time or end time. The offset will then be applied throughout - Offset subtitles easy.</p>
-    <ul>
-      <li>Sync all languages</li>
-      <li>Supports SubRip file format (.str)</li>
+    <p>Sync subtitle by changing the start time or end time. The offset will then be applied throughout.</p>
+    <ul class="list-group p-2" id="bullet-List">
+      <li class="list-group-item list-group-item-primary"><i class="fa-solid fa-language"></i> Sync all languages</li>
+      <li class="list-group-item list-group-item-primary"><i class="fa-solid fa-closed-captioning"></i> Supports SubRip file format (.str)</li>
     </ul>  
+      <ol class="list-group p-2">
+        <li class="list-group-item list-group-item-success">Find (ctrl + f) line your you want to match with a time</li>
+        <li class="list-group-item list-group-item-success">Apply offset automatically to the whole subtitle</li>
+        <li class="list-group-item list-group-item-success">Save subtitle and watch movie</li>
+      </ol>
     <div class="text-end">
         <Button 
             @file-uploaded="showData" 
@@ -14,7 +19,7 @@
             icon="fa-solid fa-upload"
             :color="downloadReady ? 'blue' : 'green'"/>
         <Transition>
-        <div v-show="downloadReady" class="fade-in" style="position: fixed;display: inline-block;" >
+        <div v-show="downloadReady" class="fade-in" style="position: fixed;top: 35px;display: inline-block;" >
             <Button 
                 @download="downloadFile"
                 childclass="btn p-2 m-2"

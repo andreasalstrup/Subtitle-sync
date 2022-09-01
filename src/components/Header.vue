@@ -1,6 +1,9 @@
 <template>
     <header>
-        <h1>{{ title }}</h1>
+        <div id="center">
+            <h1>{{ title }}</h1>
+            <h5>Offset edit made easy</h5>
+        </div>
     </header>
 </template>
 
@@ -23,5 +26,8 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+#center {
+   text-align: center;
 }
 </style>

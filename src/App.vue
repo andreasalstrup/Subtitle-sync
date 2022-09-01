@@ -107,4 +107,13 @@ input[type="file"] {
 .v-leave-to {
   opacity: 0;
 }
+.list-group {
+	list-style: decimal inside;
+}
+#bullet-List{
+  list-style: none !important;
+}
+.list-group-item {
+	display: list-item;
+}
 </style>
