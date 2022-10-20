@@ -1,4 +1,8 @@
 <template>
+    <div class="form-check float-right-top">
+    <input class="form-check-input" type="checkbox" id="tryTool" name="tryTool" v-model="downloadReady">
+    <label class="form-check-label" for="tryTool">Try tool</label>
+    </div>
     <p>Sync subtitle by changing the start time or end time. The offset will then be applied throughout.</p>
     <ul class="list-group p-2" id="bullet-List">
       <li class="list-group-item list-group-item-primary"><i class="fa-solid fa-language"></i> Sync all languages</li>
@@ -19,7 +23,7 @@
             icon="fa-solid fa-upload"
             :color="downloadReady ? 'blue' : 'green'"/>
         <Transition>
-        <div v-show="downloadReady" class="fade-in" style="position: fixed;top: 35px;display: inline-block;" >
+        <div v-show="downloadReady" class="fade-in" style="position: fixed;top: 70px;display: inline-block;" >
             <Button 
                 @download="downloadFile"
                 childclass="btn p-2 m-2"
@@ -95,7 +99,7 @@ export default {
       const languageEncoding = require("detect-file-encoding-and-language");
 
       this.subtitleName = selectedFile.name;
-      
+      this.accOffset = 0;
 
       languageEncoding(selectedFile).then((fileInfo) => {        
         let encoding = fileInfo.encoding;
